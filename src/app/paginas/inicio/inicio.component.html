@@ -1,1 +1,52 @@
-<p>inicio works!</p>
+<div class="contenedor">
+  <div class="header">
+    <h1>Pokemon.app</h1>
+  </div>
+  <div class="filtros">
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <input type="text" class="form-control" placeholder="Nombre">
+      </div>
+      <div class="col-sm-2 pl-0">
+        <button class="btn btn-primary btn-block">Buscar</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <section class="columna1 col-sm-6">
+      <h2 class="text-primary">Listado de Pokemons</h2>
+
+      <ul class="lista list-group">
+        <li *ngFor="let p of pokemons" (click)="seleccionarPokemon(p)"
+          class="list-group-item {{ (p.id==pSeleccionado.id) ? 'active' : '' }}">
+          <span class="nombre-pokemon">{{p.nombre}}</span>
+        </li>
+      </ul>
+
+    </section>
+
+    <section *ngIf="pSeleccionado !== ''; else elseBlock" class="columna2 col-sm-6">
+      <div class="detalle-header">
+        <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
+      </div>
+      <ul class="login-lista list-group">
+        <li *ngFor="let h of pSeleccionado.habilidades" class="list-group-item">
+          {{h.nombre}}
+        </li>
+      </ul>
+    </section>
+
+    <ng-template #elseBlock>
+
+      <section class="columna2 col-sm-6">
+        <p>Bienvenido a la app de pokemon!!!<br>
+          Selecciona un pokemon para abrir el detalle</p>
+      </section>
+
+    </ng-template>
+
+  </div>
+
+
+
+</div>

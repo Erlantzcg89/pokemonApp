@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './paginas/inicio/inicio.component';
+import { NavbarComponent } from './componentes/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    InicioComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
