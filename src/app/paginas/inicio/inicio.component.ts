@@ -52,7 +52,16 @@ export class InicioComponent implements OnInit {
         this.pokemons = datos;
         // TODO   que no se repitan los pokemons
 
-        this.habilidades = this.pokemons.map((el) => el.habilidades).reduce((p, c) => p.concat(c), []).filter((el, index, array) => (array.indexOf(el) === index));
+        this.habilidades = this.pokemons.map((el) => {
+          console.log('map');
+          return el.habilidades;
+        }).reduce((p, c) => {
+          console.log('reduce');
+          return p.concat(c.nombre);
+        }, []).filter((el, index, array) => {
+          console.log('filter');
+          return array.indexOf(el) === index;
+        });
 
 
         console.log('habilidades %o', this.habilidades)
