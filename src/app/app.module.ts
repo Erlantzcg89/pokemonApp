@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './paginas/inicio/inicio.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { PokemonPipe } from './pipes/pokemon.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    NavbarComponent
+    NavbarComponent,
+    PokemonPipe
   ],
   imports: [
     BrowserModule,

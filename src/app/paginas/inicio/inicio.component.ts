@@ -9,6 +9,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class InicioComponent implements OnInit {
 
   pokemons: Array<any>;
+  habilidades: Array<any>;
   alerta: any;
   pSeleccionado: any;
   busqueda: string;
@@ -17,6 +18,7 @@ export class InicioComponent implements OnInit {
     console.log('InicioComponent constructor');
 
     this.pokemons = [];
+    this.habilidades = [];
     this.alerta = undefined;
     this.pSeleccionado = '';
     this.busqueda = '';
@@ -48,7 +50,12 @@ export class InicioComponent implements OnInit {
         console.debug('get pokemons ok %o', datos);
 
         this.pokemons = datos;
-        // TODO que los pokemons no se repitan
+        // TODO   que no se repitan los pokemons
+
+        this.habilidades = this.pokemons.map((el) => el.habilidades).reduce((p, c) => p.concat(c), []).filter((el, index, array) => (array.indexOf(el) === index));
+
+
+        console.log('habilidades %o', this.habilidades)
 
       },
       error => {
