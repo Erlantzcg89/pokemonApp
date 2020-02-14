@@ -15,6 +15,11 @@ export class NavbarComponent implements OnInit {
         'ruta': 'inicio',
         'nombre': 'Inicio',
         'icono': ''
+      },
+      {
+        'ruta': 'compras',
+        'nombre': 'Compras',
+        'icono': ''
       }
     ];
 
