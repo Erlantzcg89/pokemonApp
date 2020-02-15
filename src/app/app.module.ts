@@ -8,19 +8,14 @@ import { AppComponent } from './app.component';
 import { InicioComponent } from './paginas/inicio/inicio.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { PokemonPipe } from './pipes/pokemon.pipe';
-import { ComprasComponent } from './paginas/compras/compras.component';
-import { DetalleComponent } from './paginas/compras/detalle/detalle.component';
-import { ListadoComponent } from './paginas/compras/listado/listado.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     NavbarComponent,
-    PokemonPipe,
-    ComprasComponent,
-    DetalleComponent,
-    ListadoComponent
+    PokemonPipe
   ],
   imports: [
     BrowserModule,
