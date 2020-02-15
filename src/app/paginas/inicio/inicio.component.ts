@@ -12,6 +12,7 @@ export class InicioComponent implements OnInit {
   habilidades: Array<any>;
   alerta: any;
   pSeleccionado: any;
+  hSeleccionadas: any;
   busqueda: string;
 
   constructor(private pokemonService: PokemonService) {
@@ -21,6 +22,7 @@ export class InicioComponent implements OnInit {
     this.habilidades = [];
     this.alerta = undefined;
     this.pSeleccionado = '';
+    this.hSeleccionadas = [];
     this.busqueda = '';
 
   }// InicioComponent constructor
@@ -29,10 +31,6 @@ export class InicioComponent implements OnInit {
     console.log('InicioComponent ngOnInit');
 
     this.onGet();
-
-    //TODO practicar filter reduce map @arrays frutas!!!
-
-    // filter su return true lo acepta return false lo quita
 
   }// InicioComponent ngOnInit
 
@@ -43,6 +41,21 @@ export class InicioComponent implements OnInit {
 
   }// seleccionarReceta
 
+  checkHabilidad(h) {
+    console.log('clicada habilidad: %o', h);
+
+    // en el constructor se empieza en vacio, si se clica se añade a hSeleccionadas, sino se remueve
+    if (this.hSeleccionadas.includes(h)) {
+
+      // TODO array.splice();
+      // this.hSeleccionadas.pop();
+    } else {
+      this.hSeleccionadas.push(h);
+    }
+
+    console.log('clicada habilidad: %o', this.hSeleccionadas);
+  }
+
   onGet() {
 
     this.pokemonService.listar().subscribe(
@@ -50,7 +63,7 @@ export class InicioComponent implements OnInit {
         console.debug('get pokemons ok %o', datos);
 
         this.pokemons = datos;
-        // TODO   que no se repitan los pokemons
+
         let ids = new Set();
 
         this.habilidades = this.pokemons.map((el) => {

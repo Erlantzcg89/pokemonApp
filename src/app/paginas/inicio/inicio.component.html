@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="form-group row">
-      <div *ngFor="let h of habilidades" class="col-2">
+      <div *ngFor="let h of habilidades" class="col-4">
 
-        <p class="text-center">
-          <input type="checkbox" class=""> {{h.nombre}}
+        <p class="p-0 m-0">
+          <input type="checkbox" class="" (click)="checkHabilidad(h)"> {{h.nombre}}
         </p>
       </div>
     </div>
