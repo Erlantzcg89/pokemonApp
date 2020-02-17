@@ -9,21 +9,23 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class InicioComponent implements OnInit {
 
   pokemons: Array<any>;
-  habilidades: Array<any>;
-  alerta: any;
   pSeleccionado: any;
+  pFiltrados: Array<any>;
+  habilidades: Array<any>;
   hSeleccionadas: any;
   busqueda: string;
+  alerta: any;
 
   constructor(private pokemonService: PokemonService) {
     console.log('InicioComponent constructor');
 
     this.pokemons = [];
-    this.habilidades = [];
-    this.alerta = undefined;
     this.pSeleccionado = '';
+    this.pFiltrados = [];
+    this.habilidades = [];
     this.hSeleccionadas = [];
     this.busqueda = '';
+    this.alerta = undefined;
 
   }// InicioComponent constructor
 
@@ -39,21 +41,36 @@ export class InicioComponent implements OnInit {
 
     this.pSeleccionado = pokemon;
 
-  }// seleccionarReceta
+  }// seleccionarPokemon
 
   checkHabilidad(h) {
     console.log('clicada habilidad: %o', h);
 
     // en el constructor se empieza en vacio, si se clica se añade a hSeleccionadas, sino se remueve
-    if (this.hSeleccionadas.includes(h)) {
+    if (this.hSeleccionadas.includes(h.id)) {
 
-      // TODO array.splice();
-      // this.hSeleccionadas.pop();
+      this.hSeleccionadas.splice(this.hSeleccionadas.indexOf(h.id), 1);
+      console.log('habilidades seleccionadas: %o', this.hSeleccionadas)
+
     } else {
-      this.hSeleccionadas.push(h);
+      this.hSeleccionadas.push(h.id);
     }
 
-    console.log('clicada habilidad: %o', this.hSeleccionadas);
+    console.log('habilidades seleccionadas: %o', this.hSeleccionadas);
+
+    // trabajar para obtener pFiltrados apartir del filtro en pokemons
+    this.pFiltrados = this.pokemons.filter((el, index, array) => {
+
+      console.log('el.habilidades : %o', el.habilidades);
+
+      return el.habilidades.find(h => {
+
+        return this.hSeleccionadas.includes(h.id);
+      })
+    })
+
+    console.log('el.habilidades : %o', this.pFiltrados);
+
   }
 
   onGet() {
@@ -63,6 +80,7 @@ export class InicioComponent implements OnInit {
         console.debug('get pokemons ok %o', datos);
 
         this.pokemons = datos;
+        this.pFiltrados = datos;
 
         let ids = new Set();
 

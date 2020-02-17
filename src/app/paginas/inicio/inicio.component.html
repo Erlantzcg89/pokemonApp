@@ -2,13 +2,14 @@
   <div class="header">
     <h1>Pokemon.app</h1>
   </div>
-  <div class="filtros">
+  <section class="filtros">
+    <h2 class="text-primary"><i class="fas fa-search mx-3 text-dark"></i>Buscar</h2>
     <div class="form-group row">
       <div class="col-sm-12">
         <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="busqueda">
       </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row pl-3">
       <div *ngFor="let h of habilidades" class="col-4">
 
         <p class="p-0 m-0">
@@ -16,13 +17,13 @@
         </p>
       </div>
     </div>
-  </div>
+  </section>
   <div class="row">
     <section class="columna1 col-sm-6">
-      <h2 class="text-primary">Listado de Pokemons</h2>
+      <h2 class="text-primary ml-3">Listado de Pokemons</h2>
 
       <ul class="lista list-group">
-        <li *ngFor="let p of pokemons | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)"
+        <li *ngFor="let p of pFiltrados | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)"
           class="list-group-item {{ (p.id==pSeleccionado.id) ? 'active' : '' }}">
           <span class="nombre-pokemon">{{p.nombre}}</span>
         </li>
