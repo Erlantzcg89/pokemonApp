@@ -58,6 +58,7 @@ export class InicioComponent implements OnInit {
 
     console.log('habilidades seleccionadas: %o', this.hSeleccionadas);
 
+
     // trabajar para obtener pFiltrados apartir del filtro en pokemons
     this.pFiltrados = this.pokemons.filter((el, index, array) => {
 
@@ -68,7 +69,12 @@ export class InicioComponent implements OnInit {
 
     console.log('el.habilidades : %o', this.pFiltrados);
 
+    if (this.hSeleccionadas.length === 0) {
+      this.pFiltrados = this.pokemons;
+    }
+
   }
+
 
   onGet() {
 
