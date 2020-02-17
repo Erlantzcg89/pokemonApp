@@ -63,10 +63,7 @@ export class InicioComponent implements OnInit {
 
       console.log('el.habilidades : %o', el.habilidades);
 
-      return el.habilidades.find(h => {
-
-        return this.hSeleccionadas.includes(h.id);
-      })
+      return el.habilidades.find(h => this.hSeleccionadas.includes(h.id));
     })
 
     console.log('el.habilidades : %o', this.pFiltrados);
