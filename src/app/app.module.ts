@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { InicioComponent } from './paginas/inicio/inicio.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { PokemonPipe } from './pipes/pokemon.pipe';
+import { LoginComponent } from './paginas/login/login.component';
+import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { PokemonPipe } from './pipes/pokemon.pipe';
     AppComponent,
     InicioComponent,
     NavbarComponent,
-    PokemonPipe
+    PokemonPipe,
+    LoginComponent,
+    BackofficeComponent
   ],
   imports: [
     BrowserModule,

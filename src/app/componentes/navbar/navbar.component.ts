@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RUTAS } from '../../model/constantes';
 
 @Component({
   selector: 'app-navbar',
@@ -6,18 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
   rutas: Array<any>;
 
   constructor() {
     console.trace('NavbarComponent constructor');
-    this.rutas = [
-      {
-        'ruta': 'inicio',
-        'nombre': 'Inicio',
-        'icono': ''
-      }
-    ];
 
+    this.rutas = RUTAS;
   }// constructor
 
   ngOnInit() {
