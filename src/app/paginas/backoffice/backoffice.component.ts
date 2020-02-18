@@ -114,4 +114,37 @@ export class BackofficeComponent implements OnInit {
 
   }// onCrear
 
+  onModificar(nombre: string, p: any) {
+    console.trace('onModificar elemento: %s', nombre);
+
+    if (nombre.trim() !== '') {
+
+      p.nombre = nombre;
+
+      this.pokemonService.modificar(p).subscribe(
+        data => {
+          console.debug('elemento modificado ok %o', data);
+
+          this.onGet();
+
+          // this.alerta = new Alerta();
+          // this.alerta.tipo = 'success';
+          // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
+          // console.log('alerta: %o', this.alerta);
+        },
+        error => {
+          console.warn(error);
+        }
+      );
+
+    } else {
+
+      this.alerta = new Alerta();
+      this.alerta.tipo = 'warning';
+      this.alerta.cuerpo = 'Nombre vacío';
+
+    }
+
+  }// onModificar
+
 }// BackofficeComponent

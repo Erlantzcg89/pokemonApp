@@ -40,6 +40,9 @@
             <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre"
               [(ngModel)]="nombre">
             <button class="btn btn-primary btn-block mb-2" (click)="onCrear(nombre)">Crear pokemon nuevo</button>
+            <button *ngIf="pSeleccionado !== ''" class="btn btn-secondary btn-block mb-2"
+              (click)="onModificar(nombre, pSeleccionado)">Modificar
+              pokemon seleccionado</button>
           </div>
         </article>
 
