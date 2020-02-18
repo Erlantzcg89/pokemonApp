@@ -1,1 +1,70 @@
-<p>backoffice works!</p>
+<div class="contenedor">
+  <div class="header">
+    <h1>Backoffice</h1>
+  </div>
+
+  <div *ngIf="alerta" class="alert alert-{{alerta.tipo}} alert-dismissible" role="alert">
+    {{alerta.cuerpo}}
+  </div>
+
+  <section>
+    <div class="row">
+      <div class="columna1 col-sm-6">
+        <ul>
+
+          <li *ngFor="let p of pokemons" class="list-group-item {{ (p.id==pSeleccionado.id) ? 'active' : '' }}"
+            (click)="seleccionarPokemon(p)">
+
+            <div class="row">
+
+              <div class="col-9">
+                <span>{{p.nombre}}</span>
+              </div>
+              <div class="col-3">
+                <button class="btn btn-light mb-2" (click)="onBorrar(p)"><span class="fas fa-trash"></span></button>
+              </div>
+
+            </div>
+
+          </li><!-- ngFor -->
+
+        </ul>
+
+      </div><!-- columna 1 -->
+
+      <div class="columna2 col-sm-6">
+
+        <article>
+
+          <div class="crear form">
+            <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre"
+              [(ngModel)]="nombre">
+            <button class="btn btn-primary btn-block mb-2" (click)="onCrear(nombre)">Crear pokemon nuevo</button>
+          </div>
+        </article>
+
+        <article *ngIf="pSeleccionado !== ''; else elseBlock">
+          <div class="detalle-header">
+            <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
+          </div>
+          <ul class="login-lista list-group">
+            <li *ngFor="let h of pSeleccionado.habilidades" class="list-group-item">
+              {{h.nombre}}
+            </li>
+          </ul>
+        </article>
+
+        <ng-template #elseBlock>
+
+          <article>
+            <p>Selecciona un pokemon para abrir el detalle</p>
+          </article>
+
+        </ng-template>
+
+      </div><!-- columna2 -->
+
+    </div><!-- row -->
+  </section>
+
+</div><!-- contenedor -->

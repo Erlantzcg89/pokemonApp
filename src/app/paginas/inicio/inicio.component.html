@@ -18,41 +18,41 @@
       </div>
     </div>
   </section>
-  <div class="row">
-    <section class="columna1 col-sm-6">
-      <h2 class="text-primary ml-3">Listado de Pokemons</h2>
 
-      <ul class="lista list-group">
-        <li *ngFor="let p of pFiltrados | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)"
-          class="list-group-item {{ (p.id==pSeleccionado.id) ? 'active' : '' }}">
-          <span class="nombre-pokemon">{{p.nombre}}</span>
-        </li>
-      </ul>
+  <section>
+    <div class="row">
+      <div class="columna1 col-sm-6">
+        <h2 class="text-primary ml-3">Listado de Pokemons</h2>
 
-    </section>
+        <ul class="lista list-group">
+          <li *ngFor="let p of pFiltrados | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)"
+            class="list-group-item {{ (p.id==pSeleccionado.id) ? 'active' : '' }}">
+            <span class="nombre-pokemon">{{p.nombre}}</span>
+          </li>
+        </ul>
 
-    <section *ngIf="pSeleccionado !== ''; else elseBlock" class="columna2 col-sm-6">
-      <div class="detalle-header">
-        <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
       </div>
-      <ul class="login-lista list-group">
-        <li *ngFor="let h of pSeleccionado.habilidades" class="list-group-item">
-          {{h.nombre}}
-        </li>
-      </ul>
-    </section>
 
-    <ng-template #elseBlock>
+      <div *ngIf="pSeleccionado !== ''; else elseBlock" class="columna2 col-sm-6">
+        <div class="detalle-header">
+          <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
+        </div>
+        <ul class="login-lista list-group">
+          <li *ngFor="let h of pSeleccionado.habilidades" class="list-group-item">
+            {{h.nombre}}
+          </li>
+        </ul>
+      </div>
 
-      <section class="columna2 col-sm-6">
-        <p>Bienvenido a la app de pokemon!!!<br>
-          Selecciona un pokemon para abrir el detalle</p>
-      </section>
+      <ng-template #elseBlock>
 
-    </ng-template>
+        <div class="columna2 col-sm-6">
+          <p>Selecciona un pokemon para abrir el detalle</p>
+        </div>
 
-  </div>
+      </ng-template>
 
-
+    </div>
+  </section>
 
 </div>
