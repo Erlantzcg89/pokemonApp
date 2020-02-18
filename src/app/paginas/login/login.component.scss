@@ -1,0 +1,181 @@
+.login {
+  max-width: 300px;
+  margin: auto;
+  margin-bottom: 20px;
+
+  input[type=text] {
+    border: 1px solid rgb(128, 128, 128, 0.6);
+  }
+
+  button {
+    margin-top: 7px;
+  }
+}
+
+.contenedor {
+  // background-image: url(../../../assets/img/coffe-tasks.jpg);
+  // background-repeat: repeat-y;
+  // background-size: 100%;
+
+  min-height: 80vh;
+
+  padding: 60px;
+
+}
+
+.app-navbar {
+  padding: 20px;
+  background-color: rgb(52, 58, 64);
+  min-height: 88px;
+}
+
+.app-navbar h1 {
+  position: relative;
+  left: 100px;
+  bottom: 5px;
+
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.app-navbar p {
+  font-size: 14px;
+
+  position: relative;
+  right: 120px;
+
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.logout {
+  color: blue;
+  margin: 0 0 20px;
+
+  a:hover {
+    text-decoration: underline;
+    color: red;
+    cursor: pointer;
+  }
+}
+
+main {
+
+  background-color: rgb(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  min-height: 80vh;
+}
+
+.completada {
+  text-decoration: line-through;
+}
+
+.nueva-tarea {
+  max-width: 300px;
+  // margin: auto;
+  margin-bottom: 20px;
+
+  input[type=text] {
+    border: 1px solid rgb(128, 128, 128, 0.6);
+  }
+
+  button {
+    margin-top: 7px;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+
+}
+
+hr {
+  height: 6px;
+
+}
+
+.tarea {
+  padding-left: 0;
+
+  span {
+    display: inline-block;
+    background-color: white;
+    padding: 5px 8px;
+    border: 1px solid rgb(128, 128, 128, 0.6);
+    border-radius: 5px;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+.tarea-boton {
+  button {
+    border: 1px solid rgb(128, 128, 128, 0.6) !important;
+  }
+}
+
+.tarea-titulo {
+
+  min-width: 213px;
+
+}
+
+.tarea-check {
+
+  padding-right: 0;
+
+
+}
+
+@media only screen and (max-width: 900px) {
+
+  .contenedor {
+    padding: 0 0 0;
+  }
+
+  main {
+    min-height: 80vh;
+
+  }
+
+  .app-navbar h1 {
+    position: initial;
+
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+  .app-navbar h1 {
+    position: initial;
+
+  }
+
+  .app-navbar p {
+    position: initial;
+
+
+  }
+
+}
+
+@media only screen and (max-width: 400px) {
+
+  .app-navbar h1 {
+
+    margin-bottom: 10px;
+
+  }
+
+
+}

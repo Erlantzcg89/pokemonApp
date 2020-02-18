@@ -5,3 +5,10 @@ export const RUTAS = [
         'icono': ''
     }
 ];
+
+export const USUARIOS = [
+    {
+        'nombre': 'admin',
+        'password': 'admin'
+    }
+];

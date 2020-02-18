@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RUTAS } from '../../model/constantes';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   rutas: Array<any>;
 
-  constructor() {
+  constructor(private usuarioService: UsuarioService, private router: Router) {
     console.trace('NavbarComponent constructor');
 
     this.rutas = RUTAS;
@@ -20,8 +22,11 @@ export class NavbarComponent implements OnInit {
     console.trace('NavbarComponent ngOnInit');
   }// ngOnInit
 
-  salir() {
-    console.trace('NavbarComponent click boton Cerrar Sesión');
+  onSalir() {
+    console.trace('TareasComponent onSalir');
+
+    this.usuarioService.cerrarSesion();
+    this.router.navigate(['login']);
 
   }// salir
 
