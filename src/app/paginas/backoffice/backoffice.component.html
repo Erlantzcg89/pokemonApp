@@ -50,7 +50,8 @@
           <div class="detalle-header">
             <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
           </div>
-          <ul class="login-lista list-group">
+          {{pSeleccionado.habilidades | json}}
+          <ul *ngIf="pSeleccionado.habilidades !== []" class="login-lista list-group">
             <li *ngFor="let h of pSeleccionado.habilidades" class="list-group-item">
               {{h.nombre}}
             </li>
