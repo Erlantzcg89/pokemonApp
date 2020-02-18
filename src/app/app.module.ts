@@ -10,6 +10,7 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { PokemonPipe } from './pipes/pokemon.pipe';
 import { LoginComponent } from './paginas/login/login.component';
 import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
+import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BackofficeComponent } from './paginas/backoffice/backoffice.component';
     NavbarComponent,
     PokemonPipe,
     LoginComponent,
-    BackofficeComponent
+    BackofficeComponent,
+    MensajeComponent
   ],
   imports: [
     BrowserModule,
