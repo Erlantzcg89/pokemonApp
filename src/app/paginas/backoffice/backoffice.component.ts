@@ -75,6 +75,8 @@ export class BackofficeComponent implements OnInit {
 
     this.pSeleccionado = pokemon;
 
+    this.onGetHabilidades();
+
   }// seleccionarPokemon
 
   onGet() {
@@ -113,6 +115,18 @@ export class BackofficeComponent implements OnInit {
           }
         });
 
+        if (this.pSeleccionado !== '') {
+
+          this.habilidades.find(h => {
+            console.debug('find');
+            return this.pSeleccionado.habilidades.includes(h.id);
+          }).forEach(el => {
+            console.debug('forEach');
+            el.checked = true
+          });
+
+        }
+
       },
       error => {
         console.warn(error);
@@ -150,17 +164,14 @@ export class BackofficeComponent implements OnInit {
 
   }// onBorrar
 
-  onCrear(nombre: string) {
-    console.trace('onCrear tarea: %s', nombre);
+  onCrear(pokemon: any) {
+    console.trace('onCrear tarea: %o', pokemon);
 
-    if (nombre.trim() !== '') {
+    if (pokemon.nombre.trim() !== '') {
 
-      let p = new Object();
-      p['nombre'] = nombre;
-
-      this.pokemonService.crear(p).subscribe(
+      this.pokemonService.crear(pokemon).subscribe(
         data => {
-          console.debug('tarea creada ok %o', data);
+          console.debug('pokemon creado ok %o', data);
 
           this.onGet();
 

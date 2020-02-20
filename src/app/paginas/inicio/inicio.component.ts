@@ -60,7 +60,7 @@ export class InicioComponent implements OnInit {
 
 
     // trabajar para obtener pFiltrados apartir del filtro en pokemons
-    this.pFiltrados = this.pokemons.filter((el, index, array) => {
+    this.pFiltrados = this.pokemons.filter((el) => {
 
       console.log('el.habilidades : %o', el.habilidades);
 
