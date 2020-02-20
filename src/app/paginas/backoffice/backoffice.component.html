@@ -2,11 +2,12 @@
   <div class="header">
     <h1>Backoffice</h1>
 
-    <app-mensaje></app-mensaje>
+    <!-- <app-mensaje></app-mensaje> -->
 
-  </div>
-  <div *ngIf="alerta" class="alert alert-{{alerta.tipo}} alert-dismissible" role="alert">
-    {{alerta.cuerpo}}
+    <div *ngIf="alerta" class="alert alert-{{alerta.tipo}} alert-dismissible" role="alert">
+      {{alerta.cuerpo}}
+    </div>
+
   </div>
 
   <section>
@@ -38,9 +39,15 @@
 
         <article>
 
-          <h3>Formulario</h3>
-          {{ formulario.value | json }}
-          {{ formulario.status | json }}
+          <button class="btn btn-primary btn-block mb-2" (click)="onCrear(formulario.value)">Crear pokemon
+            nuevo</button>
+          <button *ngIf="pSeleccionado !== ''" class="btn btn-success btn-block mb-2"
+            (click)="onModificar(formulario.value)">Modificar
+            pokemon seleccionado</button>
+          <button class="btn btn-secondary btn-block mb-2" (click)="onLimpiar()">Limpiar Formulario</button>
+
+          <!-- {{ formulario.value | json }}
+          {{ formulario.status | json }} -->
 
           <form [formGroup]="formulario">
 
@@ -58,7 +65,7 @@
                       <span>{{h.nombre}}</span>
                     </div>
                     <div class="col-3">
-                      {{h.checked}}
+                      <i *ngIf="h.checked" class="fas fa-check"></i>
                     </div>
 
                   </div>
@@ -67,17 +74,12 @@
 
               </ul>
 
-              <button class="btn btn-primary btn-block mb-2" (click)="onCrear(formulario.value)">Crear pokemon
-                nuevo</button>
-              <button *ngIf="pSeleccionado !== ''" class="btn btn-secondary btn-block mb-2"
-                (click)="onModificar(nombre, pSeleccionado)">Modificar
-                pokemon seleccionado</button>
             </div>
 
           </form>
         </article>
 
-        <article *ngIf="pSeleccionado !== ''; else elseBlock">
+        <!-- <article *ngIf="pSeleccionado !== ''; else elseBlock">
           <div class="detalle-header">
             <h2 class="text-center">{{pSeleccionado.nombre}}</h2>
           </div>
@@ -95,7 +97,7 @@
             <p>Selecciona un pokemon para abrir el detalle</p>
           </article>
 
-        </ng-template>
+        </ng-template> -->
 
       </div><!-- columna2 -->
 

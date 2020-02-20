@@ -75,6 +75,9 @@ export class BackofficeComponent implements OnInit {
 
     this.pSeleccionado = pokemon;
 
+    this.formulario.get('nombre').setValue(this.pSeleccionado.nombre);
+
+    this.onGet();
     this.onGetHabilidades();
 
   }// seleccionarPokemon
@@ -91,10 +94,9 @@ export class BackofficeComponent implements OnInit {
       error => {
         console.warn(error);
 
-        this.alerta = {
-          "tipo": "danger",
-          "cuerpo": "Aplicación fuera de servicio"
-        }
+        this.alerta = new Alerta();
+        this.alerta.tipo = 'danger';
+        this.alerta.cuerpo = 'Aplicación fuera de servicio';
 
       }
     )
@@ -115,14 +117,18 @@ export class BackofficeComponent implements OnInit {
           }
         });
 
-        if (this.pSeleccionado !== '') {
+        if (this.pSeleccionado) {
 
-          this.habilidades.find(h => {
-            console.debug('find');
-            return this.pSeleccionado.habilidades.includes(h.id);
-          }).forEach(el => {
-            console.debug('forEach');
-            el.checked = true
+          this.habilidades = this.habilidades.map(h => {
+            console.debug('map');
+            const posicion = this.pSeleccionado.habilidades.findIndex(el => el.id === h.id);
+            if (posicion !== -1) {
+              h.checked = true;
+            } else {
+              h.checked = false;
+            }
+
+            return h;
           });
 
         }
@@ -130,11 +136,6 @@ export class BackofficeComponent implements OnInit {
       },
       error => {
         console.warn(error);
-
-        this.alerta = {
-          "tipo": "danger",
-          "cuerpo": "Aplicación fuera de servicio"
-        }
 
       }
     )
@@ -151,11 +152,12 @@ export class BackofficeComponent implements OnInit {
         console.debug('elemento borrado ok %o', data);
 
         this.onGet();
+        this.onGetHabilidades();
 
-        // this.alerta = new Alerta();
-        // this.alerta.tipo = 'success';
-        // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
-        // console.log('alerta: %o', this.alerta);
+
+        this.alerta = new Alerta();
+        this.alerta.tipo = 'success';
+        this.alerta.cuerpo = 'Pokemon: "' + p.nombre + '" borrado con éxito';
       },
       error => {
         console.warn(error);
@@ -174,11 +176,11 @@ export class BackofficeComponent implements OnInit {
           console.debug('pokemon creado ok %o', data);
 
           this.onGet();
+          this.onGetHabilidades();
 
-          // this.alerta = new Alerta();
-          // this.alerta.tipo = 'success';
-          // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
-          // console.log('alerta: %o', this.alerta);
+          this.alerta = new Alerta();
+          this.alerta.tipo = 'success';
+          this.alerta.cuerpo = 'Pokemon: "' + pokemon.nombre + '" creado con éxito';
         },
         error => {
           console.warn(error);
@@ -195,23 +197,24 @@ export class BackofficeComponent implements OnInit {
 
   }// onCrear
 
-  onModificar(nombre: string, p: any) {
-    console.trace('onModificar elemento: %s', nombre);
+  onModificar(pokemon: any) {
+    console.trace('onModificar elemento: %o', pokemon);
 
-    if (nombre.trim() !== '') {
+    pokemon.id = this.pSeleccionado.id;
+    pokemon.habilidades = this.habilidades.filter(el => el.checked);
 
-      p.nombre = nombre;
+    if (pokemon.nombre.trim() !== '') {
 
-      this.pokemonService.modificar(p).subscribe(
+      this.pokemonService.modificar(pokemon).subscribe(
         data => {
           console.debug('elemento modificado ok %o', data);
 
           this.onGet();
+          this.onGetHabilidades();
 
-          // this.alerta = new Alerta();
-          // this.alerta.tipo = 'success';
-          // this.alerta.cuerpo = 'Tarea: "' + t.titulo + '" borrada con éxito';
-          // console.log('alerta: %o', this.alerta);
+          this.alerta = new Alerta();
+          this.alerta.tipo = 'success';
+          this.alerta.cuerpo = 'Pokemon: "' + pokemon.nombre + '" modificado con éxito';
         },
         error => {
           console.warn(error);
@@ -244,5 +247,9 @@ export class BackofficeComponent implements OnInit {
     }
 
   }// onCheckHabilidad
+
+  onLimpiar() {
+    window.location.reload();
+  }// onLimpiar
 
 }// BackofficeComponent
