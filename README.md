@@ -1,5 +1,3 @@
-<?php 
-
 	unset($_SESSION);
 
 	$datos_cookie = session_get_cookie_params();
@@ -9,4 +7,3 @@
 	session_destroy(); // destruyo la sesión
 	echo "<br>Has cerrado la sesión. Vuelve cuando quieras.<br>";
 
-	 ?>
