@@ -38,14 +38,42 @@
 
         <article>
 
-          <div class="crear form">
-            <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre"
-              [(ngModel)]="nombre">
-            <button class="btn btn-primary btn-block mb-2" (click)="onCrear(nombre)">Crear pokemon nuevo</button>
-            <button *ngIf="pSeleccionado !== ''" class="btn btn-secondary btn-block mb-2"
-              (click)="onModificar(nombre, pSeleccionado)">Modificar
-              pokemon seleccionado</button>
-          </div>
+          <h3>Formulario</h3>
+          {{ formulario.value | json }}
+          {{ formulario.status | json }}
+
+          <form [formGroup]="formulario">
+
+            <div class="crear form">
+              <input spellcheck="false" type="text" class="form-control mb-2 mr-sm-2" placeholder="Nombre"
+                [(ngModel)]="nombre">
+
+              <ul>
+
+                <li *ngFor="let h of habilidades" class="list-group-item" (click)="onCheckHabilidad(h)">
+
+                  <div class="row">
+
+                    <div class="col-9">
+                      <span>{{h.nombre}}</span>
+                    </div>
+                    <div class="col-3">
+                      {{h.checked}}
+                    </div>
+
+                  </div>
+
+                </li><!-- ngFor -->
+
+              </ul>
+
+              <button class="btn btn-primary btn-block mb-2" (click)="onCrear(nombre)">Crear pokemon nuevo</button>
+              <button *ngIf="pSeleccionado !== ''" class="btn btn-secondary btn-block mb-2"
+                (click)="onModificar(nombre, pSeleccionado)">Modificar
+                pokemon seleccionado</button>
+            </div>
+
+          </form>
         </article>
 
         <article *ngIf="pSeleccionado !== ''; else elseBlock">

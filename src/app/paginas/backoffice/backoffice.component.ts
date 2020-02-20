@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { Alerta } from 'src/app/model/alerta';
+import { HabilidadService } from 'src/app/services/habilidad.service';
+import { FormsModule, FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-backoffice',
@@ -11,20 +13,60 @@ export class BackofficeComponent implements OnInit {
 
   pokemons: Array<any>;
   pSeleccionado: any;
+  habilidades: Array<any>;
   alerta: any;
 
-  constructor(private pokemonService: PokemonService) {
+  formulario: FormGroup;
+  formHabilidades: FormArray;
+
+  constructor(private pokemonService: PokemonService, private habilidadService: HabilidadService,
+    private formBuilder: FormBuilder) {
     console.log('BackofficeComponent constructor');
 
     this.pokemons = [];
     this.pSeleccionado = '';
     this.alerta = undefined;
+    this.crearFormulario();
   }// BackofficeComponent constructor
+
+  private crearFormulario() {
+
+    this.formulario = this.formBuilder.group({
+      id: new FormControl(0),
+      nombre: new FormControl('',
+        Validators.compose(
+          [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(50)
+          ])
+      ),
+      habilidades: this.formBuilder.array([], // creamos array sin hbailidades
+        // [ this.crearFormGroupHabilidad() ] <- meter habilidades segun se contruye
+        Validators.compose(
+          [
+            Validators.required,
+            Validators.minLength(1)
+          ])
+      )
+    });
+
+    this.formHabilidades = this.formulario.get('habilidades') as FormArray;
+
+  }// crearFormulario
+
+  private crearFormGroupHabilidad(): FormGroup {
+    return this.formBuilder.group({
+      id: new FormControl(0),
+      nombre: new FormControl('')
+    });
+  }// crearFormGroupHabilidad
 
   ngOnInit() {
     console.log('BackofficeComponent ngOnInit');
 
     this.onGet();
+    this.onGetHabilidades();
 
   }// BackofficeComponent ngOnInit
 
@@ -56,6 +98,34 @@ export class BackofficeComponent implements OnInit {
     )
 
   }//BackofficeComponent onGet
+
+  onGetHabilidades() {
+
+    this.habilidadService.listar().subscribe(
+      datos => {
+        console.debug('get habilidades ok %o', datos);
+
+        this.habilidades = datos.map((el) => {
+          return {
+            "id": el.id,
+            "nombre": el.nombre,
+            "checked": false
+          }
+        });
+
+      },
+      error => {
+        console.warn(error);
+
+        this.alerta = {
+          "tipo": "danger",
+          "cuerpo": "Aplicación fuera de servicio"
+        }
+
+      }
+    )
+
+  }//BackofficeComponent onGetHabilidades
 
   onBorrar(p: any) {
     console.trace('onBorrar id: %o', p);
@@ -146,5 +216,22 @@ export class BackofficeComponent implements OnInit {
     }
 
   }// onModificar
+
+  onCheckHabilidad(h: any) {
+    console.debug('onCheckHabilidad %o', h);
+
+    h.checked = !h.checked;
+
+    const habilidad = this.crearFormGroupHabilidad();
+    habilidad.get('id').setValue(h.id);
+    habilidad.get('nombre').setValue(h.nombre);
+
+    if (h.checked == false) {
+      this.formHabilidades.removeAt(this.formHabilidades.value.findIndex(el => el.id === h.id));
+    } else {
+      this.formHabilidades.push(habilidad);
+    }
+
+  }// onCheckHabilidad
 
 }// BackofficeComponent
