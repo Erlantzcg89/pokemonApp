@@ -36,16 +36,7 @@ export class LoginComponent implements OnInit {
 
     const nombre = values.nombre;
     const contra = values.contra;
-    const sesion = this.usuarioService.login(nombre, contra);
-
-    if (sesion) {
-      console.trace('Usuario logeado con exito %o', sesion);
-      this.router.navigate(['backoffice']);
-    } else {
-      console.warn('Usuario NO logeado');
-      // TODO cambiar alert
-      alert('Por favor prueba de nuevo a logearte');
-    }
+    this.usuarioService.login(nombre, contra);
 
   }// enviar
 

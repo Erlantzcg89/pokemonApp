@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../model/usuario';
-import { USUARIOS } from '../model/constantes'
+import { PokemonService } from './pokemon.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,13 @@ export class UsuarioService {
 
   private isLogged: boolean;
   private usuario: Usuario;
-  private usuarios: Array<any>;
   private sesion: Usuario;
 
-  constructor() {
+  constructor(private router: Router, private pokemonService: PokemonService) {
     console.trace('UsuarioService constructor');
     this.isLogged = false;
     this.usuario = undefined;
-    this.usuarios = USUARIOS;
-    console.trace('constante usuarios: %o', USUARIOS);
+    this.sesion = undefined;
 
   }// constructor
 
@@ -33,34 +32,42 @@ export class UsuarioService {
     return this.isLogged;
   }
 
-  login(nombre: string, password: string): Usuario {
+  login(nombre: string, password: string): any {
     console.trace('UsuarioService login nombre %s password %s', nombre, password);
 
-    this.usuarios.forEach(el => {
+    this.pokemonService.login(nombre, password).subscribe(
+      datos => {
+        console.debug('login ok %o', datos);
 
-      if (el.nombre === nombre.toLowerCase() && el.password === password.toLowerCase()) {
+        this.usuario = datos;
 
-        this.isLogged = true;
-        this.sesion = new Usuario();
-        this.sesion.nombre = el.nombre;
-        this.sesion.password = '';
-        this.sesion.repo = el.repo;
+        if (this.usuario) {
 
-      }
+          this.sesion = new Usuario();
+          this.sesion.nombre = nombre;
 
-    });
+          sessionStorage.setItem('usuario', JSON.stringify(this.sesion));
 
-    if (this.isLogged) {
-      console.trace('usuario encontrado');
+          this.isLogged = true;
 
-      sessionStorage.setItem('usuario', JSON.stringify(this.sesion));
+          console.trace('usuario encontrado');
 
-    } else {
-      console.trace('usuario NO encontrado');
-      this.isLogged = false;
-    }
+          this.router.navigate(['backoffice']);
 
-    return this.sesion;
+        } else {
+          console.trace('usuario NO encontrado');
+          this.isLogged = false;
+        }
+
+        return this.sesion;
+
+      },
+      error => {
+        console.warn(error);
+
+      });
+
+
   }// login
 
   getSesion() {
