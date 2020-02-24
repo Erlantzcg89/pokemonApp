@@ -32,7 +32,7 @@ export class HabilidadService {
   public modificar(habilidad: any): Observable<any> {
     const url = `http://localhost:8080/pokemon-rest/api/habilidad/${habilidad.id}`;
     console.trace('HabilidadService modificar' + url);
-    return this.http.put<any>(url, pokemon);
+    return this.http.put<any>(url, habilidad);
   }//HabilidadService modificar
 
   public borrar(id: number): Observable<any> {

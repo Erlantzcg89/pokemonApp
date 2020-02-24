@@ -70,7 +70,7 @@ export class BackofficeComponent implements OnInit {
 
   }// BackofficeComponent ngOnInit
 
-  seleccionarPokemon = function (pokemon) {
+  seleccionarPokemon(pokemon: any) {
     console.log("seleccionarPokemon( id: " + pokemon.id + ", nombre: " + pokemon.nombre + ")");
 
     this.pSeleccionado = pokemon;
@@ -181,6 +181,8 @@ export class BackofficeComponent implements OnInit {
           this.alerta = new Alerta();
           this.alerta.tipo = 'success';
           this.alerta.cuerpo = 'Pokemon: "' + pokemon.nombre + '" creado con éxito';
+
+          this.seleccionarPokemon(pokemon);
         },
         error => {
           console.warn(error);
@@ -215,6 +217,8 @@ export class BackofficeComponent implements OnInit {
           this.alerta = new Alerta();
           this.alerta.tipo = 'success';
           this.alerta.cuerpo = 'Pokemon: "' + pokemon.nombre + '" modificado con éxito';
+
+          this.seleccionarPokemon(pokemon);
         },
         error => {
           console.warn(error);
