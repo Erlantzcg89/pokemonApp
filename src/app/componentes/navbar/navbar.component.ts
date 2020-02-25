@@ -10,9 +10,16 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+  public get usuarioService(): UsuarioService {
+    return this._usuarioService;
+  }
+  public set usuarioService(value: UsuarioService) {
+    this._usuarioService = value;
+  }
+
   rutas: Array<any>;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(private _usuarioService: UsuarioService, private router: Router) {
     console.trace('NavbarComponent constructor');
 
     this.rutas = RUTAS;

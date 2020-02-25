@@ -13,7 +13,7 @@ export const ENTORNO = [
     },
     {
         'nombre': 'produccion',
-        'url': 'http://localhost:8080/pokemon_rest_erlantz/'
+        'url': 'http://192.168.0.50:8080/pokemon_rest_erlantz/'
     }
 ]
 
