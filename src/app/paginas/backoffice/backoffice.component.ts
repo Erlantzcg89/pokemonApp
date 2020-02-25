@@ -253,7 +253,8 @@ export class BackofficeComponent implements OnInit {
   }// onCheckHabilidad
 
   onLimpiar() {
-    window.location.reload();
+    this.formulario.reset();
+
   }// onLimpiar
 
 }// BackofficeComponent
