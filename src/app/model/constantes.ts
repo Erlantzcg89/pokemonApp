@@ -6,6 +6,17 @@ export const RUTAS = [
     }
 ];
 
+export const ENTORNO = [
+    {
+        'nombre': 'local',
+        'url': 'http://localhost:8080/pokemon-rest/'
+    },
+    {
+        'nombre': 'produccion',
+        'url': 'http://localhost:8080/pokemon_rest_erlantz/'
+    }
+]
+
 export const USUARIOS = [
     {
         'nombre': 'admin',
